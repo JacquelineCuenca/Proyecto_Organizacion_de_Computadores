@@ -3,6 +3,7 @@
 
 
 .text
+.globl main
 main:
 
 
