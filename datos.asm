@@ -107,10 +107,14 @@
 
 
 	#Solicitar al usuario 
-	ingreso1: .asciiz "Ingrese un país: "
-	ingreso2: .asciiz "Ingrese un pais: "
-	ingreso3: .asciiz "Ingrese un pais: "
-	ingreso4: .asciiz "Ingrese un pais: "
+	ingreso: .asciiz "Ingrese un país: "
+	
+	grupo: .space 16   # 4 índices (words)
 
+	entrada: .space 40  # para leer nombre del país
+	
 	msj_error: .asciiz "País no valido."
+	
+	msj_repetido: .asciiz "País repetido."
+	
 	msj_registro: .asciiz "País registrado exitosamente"
