@@ -5,9 +5,11 @@
 # Pedir al usuario 4 equipos
 #valida que sean validos 
 
+
+#===============================================================================================
 # Aqui comienza comparador string
 
-# a0 = input
+# a0 = entrada del usuario
 # a1 = pais del arreglo
 
 comparar_str: 
@@ -34,38 +36,41 @@ distintos:
 	jr $ra
 
 
-#----------------------------------------------------------
-# Quitar el salto de linea
+#=============================================================================
+#eliminar el salto de linea
 
 
-quitar_salto:
+eliminar_salto:
 
-loop_q:
+loop_s:
 
     lb $t0,0($a0)
 
-    beq $t0,$zero,fin_q
+    beq $t0,$zero,fin_e
 
     li $t1,10
 
     beq $t0,$t1,reemplazar
 
     addi $a0,$a0,1
-    j loop_q
+    j loop_s
 
 reemplazar:
 
     sb $zero,0($a0)
 
-fin_q:
+fin_e:
 
     jr $ra
 
 
 
-# ----------------------------------------------------------------------
+# ===================================================================================
 #Aqui comienza BUSCAR PAIS
 #-------------------------------------------------------------------------
+
+# devuelve el indice del pais si existe
+#-1 si no existe
 
 buscar_pais:
 	addi $sp,$sp,-12
@@ -87,12 +92,12 @@ loop_paises:
     	lw  $t3, 0($t1)
 
     # comparar input con país actual
-   	 move $a0, $s1      # restaurar input
-   	 move $a1, $t3          # país del arreglo
+   	 move $a0, $s1      
+   	 move $a1, $t3       
 
    	 jal comparar_str
 
-    	beq $v0, 1, encontrado
+    	 beq $v0, 1, encontrado
 
    	 addi $s2, $s2, 1
    	 j loop_paises
@@ -125,7 +130,9 @@ no_esta:
 #Aqui termina BUSCAR PAIS
 
 #================================================================================
-#------------------------------------------
+# funcion es_existente
+# ve si el indice de un pais ya esta en arreglo grupo
+
 es_existente: 
 	li $t0, 0
 	
@@ -156,16 +163,17 @@ no_existe:
 	
 
 #=================================================================
-# ------------------------------------------------------------------
+# 
 # Aquí comienza seleccionar equipos 
+# solicitar al usuario 4 equipos y no repetidos
 
 seleccionar_equipos:
 
- 	 addi $sp,$sp,-8
-   	 sw $ra,0($sp)
-   	 sw $s0,4($sp)
-
-   	 li $s0,0
+ 	addi $sp,$sp,-12
+	sw $ra,0($sp)
+	sw $s0,4($sp)
+	sw $s1,8($sp)
+   	li $s0,0
 	
 for_e:
 	bge $s0, 4, salir # if t0 > = 4 -> salir
@@ -188,21 +196,21 @@ volver:
 	# buscar el país ingresado
 	la $a0, entrada
 	
-	jal quitar_salto
+	jal eliminar_salto
 	
 	la $a0, entrada
 	
 	jal buscar_pais
 	
 	
-	move $t1, $v0
+	move $s1, $v0
 	
 	#validar que existe
 	li $t2, -1
-	beq $t1, $t2, error
+	beq $s1, $t2, error
 	
 	#validar si no es repetido
-	move $a0,$t1
+	move $a0,$s1
 	jal es_existente
 	
 	beq $v0, 1, repetido
@@ -212,7 +220,7 @@ volver:
 	la $t3, grupo
 	sll $t4, $s0, 2
 	add $t3, $t3, $t4
-	sw $t1, 0($t3)
+	sw $s1, 0($t3)
 	
 	# confirma
 	li $v0, 4
@@ -237,11 +245,11 @@ repetido:
 	
 salir:
 
-	lw $s0,4($sp)
-    	lw $ra,0($sp)
+	lw $s1,8($sp)
+ 	lw $s0,4($sp)
+	lw $ra,0($sp)
 
-    	addi $sp,$sp,8
-
+	addi $sp,$sp,12
     
 	jr $ra
 
