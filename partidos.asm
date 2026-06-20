@@ -1,6 +1,3 @@
-#.include "datos.asm"
-
-
 .text
 
 # Simula los partidos entre los 4 equipos ingreados por el usuario
