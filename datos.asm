@@ -109,6 +109,11 @@
 
 	grupo: .word -1,-1,-1,-1   # 4 índices (words)
 
+	# Estadísticas acumuladas para los 48 países
+	gf: .space 192
+	gc: .space 192
+	puntos: .space 192
+
 	entrada: .space 40  # para leer nombre del país
 	
 	msj_error: .asciiz "País no valido.\n"

@@ -1,35 +1,40 @@
-.include "datos.asm"
+#.include "datos.asm"
 
 
 .text
 
 # Simula los partidos entre los 4 equipos ingreados por el usuario
 simular_partidos:
-    # equipos[0] vs equipos[1]
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)
+
+    # grupo[0] vs grupo[1]
     li $a0, 0
     li $a1, 1
     jal jugar_partido
 
-    # equipos[0] vs equipos[2]
+    # grupo[0] vs grupo[2]
     li $a0, 0
     li $a1, 2
     jal jugar_partido
 
-    # equipos[1] vs equipos[2]
+    # grupo[1] vs grupo[2]
     li $a0, 1
     li $a1, 2
     jal jugar_partido
 
-    # equipos[1] vs equipos[3]
+    # grupo[1] vs grupo[3]
     li $a0, 1
     li $a1, 3
     jal jugar_partido
 
-    # equipos[2] vs equipos[3]
+    # grupo[2] vs grupo[3]
     li $a0, 2
     li $a1, 3
     jal jugar_partido
 
+    lw $ra, 0($sp)
+    addi $sp, $sp, 4
     jr $ra
 
 
@@ -65,8 +70,10 @@ jugar_partido:
 # Genera un número aleatorio entre 0 y 5 (goles)
 random_gol:
     li $v0, 42      # random
+    li $a0, 0       # generador aleatorio 0
     li $a1, 6       # rango 0–5
     syscall
+    move $v0, $a0
     jr $ra
 
 
@@ -88,6 +95,9 @@ actualizar_estadisticas:
     sw $t2, 0($t0)
 
     la $t0, gc
+    sll $t1, $a0, 2
+    add $t0, $t0, $t1
+    lw $t2, 0($t0)
     add $t2, $t2, $a3
     sw $t2, 0($t0)
 
@@ -101,6 +111,9 @@ actualizar_estadisticas:
     sw $t2, 0($t0)
 
     la $t0, gc
+    sll $t1, $a1, 2
+    add $t0, $t0, $t1
+    lw $t2, 0($t0)
     add $t2, $t2, $a2
     sw $t2, 0($t0)
 
