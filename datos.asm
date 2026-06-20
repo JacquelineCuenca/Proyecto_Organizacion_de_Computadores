@@ -109,10 +109,10 @@
 
 	grupo: .word -1,-1,-1,-1   # 4 índices (words)
 
-	# Estadísticas acumuladas para los 48 países
-	gf: .space 192
-	gc: .space 192
-	puntos: .space 192
+	# Estadísticas acumuladas de los 4 países seleccionados
+	gf: .space 16 # goles a favor
+	gc: .space 16 # 4 goles en contra
+	puntos: .space 16 # puntos acumulados
 
 	entrada: .space 40  # para leer nombre del país
 	
