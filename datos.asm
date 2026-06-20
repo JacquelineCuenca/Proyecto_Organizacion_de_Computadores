@@ -103,18 +103,18 @@
 		.word uzbekistan
 
 
-	NUM_PAISES: .word 48
-
 
 	#Solicitar al usuario 
 	ingreso: .asciiz "Ingrese un país: "
-	
-	grupo: .space 16   # 4 índices (words)
+
+	grupo: .word -1,-1,-1,-1   # 4 índices (words)
 
 	entrada: .space 40  # para leer nombre del país
 	
-	msj_error: .asciiz "País no valido."
+	msj_error: .asciiz "País no valido.\n"
 	
-	msj_repetido: .asciiz "País repetido."
+	msj_repetido: .asciiz "País repetido.\n"
 	
-	msj_registro: .asciiz "País registrado exitosamente"
+	msj_registro: .asciiz "País registrado exitosamente\n"
+	
+	NUM_PAISES: .word 48

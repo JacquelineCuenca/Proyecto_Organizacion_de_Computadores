@@ -1,15 +1,17 @@
-# PROYECTO - ORGANIZACIÓN DE COMPUTADORES
-.include "datos.asm"
+# PROYECTO - ORGANIZACIÓN DE COMPUTADORES 
+.include "datos.asm" 
+.include "equipos.asm" 
 
 
-.text
+.text 
+
+
 .globl main
-main:
 
 
-	
-
-
-	# Terminar
-	li $v0, 10
-	syscall
+ main: 
+	    jal seleccionar_equipos
+	    
+	    
+	    li $v0, 10
+   	    syscall
