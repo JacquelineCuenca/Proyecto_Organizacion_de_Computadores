@@ -3,6 +3,7 @@
 .include "equipos.asm" 
 .include "partidos.asm"
 .include "tabla_de_posiciones.asm"
+.include "clasificados.asm"
 
 .text 
 
@@ -20,6 +21,10 @@
 	    # Fase 2: Tabla de posiciones
 	    jal ordenar_tabla
 	    jal mostrar_tabla_ordenada
+	    
+	    #Fase 3: Mostrar clasificados
+	    
+	    jal mostrar_clasificados
 	    
 	    li $v0, 10
    	    syscall
