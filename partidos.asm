@@ -1,10 +1,13 @@
 .data
     msj_resultados: .asciiz "\nResultados de partidos:\n"
     msj_tabla: .asciiz "\nTabla de posiciones (sin ordenar):\n"
-    enc_tabla: .asciiz "Equipo\tGF\tGC\tPts\n"
-    sep_tab: .asciiz "\t"
+    enc_tabla: .asciiz "Equipo        GF   GC   Pts\n"
+    sep_tab: .asciiz "   "
     sep_guion: .asciiz " - "
     salto_linea: .asciiz "\n"
+    linea_top: .asciiz "===================================\n"
+    linea_sep: .asciiz "--------------------------------------\n"
+    espacio: .asciiz "        "
 
 .text
 
@@ -231,8 +234,9 @@ loop_tabla:
     move $a0, $s0
     jal imprimir_nombre_equipo_grupo
 
+    # espacio 
     li $v0, 4
-    la $a0, sep_tab
+    la $a0, espacio
     syscall
 
     # GF

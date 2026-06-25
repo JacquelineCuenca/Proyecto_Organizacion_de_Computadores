@@ -1,7 +1,7 @@
 .data
     orden_indices: .word 0,1,2,3
     msj_tabla_ordenada: .asciiz "\nTabla de posiciones (ordenada):\n"
-
+   
 .text
 .globl ordenar_tabla
 ordenar_tabla:
@@ -122,14 +122,30 @@ mostrar_tabla_ordenada:
     sw $s0, 4($sp)
     sw $s1, 8($sp)
 
+
+    li $v0, 4
+    la $a0, linea_top
+    syscall
+
+
     # imprimir encabezado
     li $v0, 4
     la $a0, msj_tabla_ordenada
     syscall
 
     li $v0, 4
+    la $a0, linea_top
+    syscall
+
+    li $v0, 4
     la $a0, enc_tabla
     syscall
+
+
+    li $v0, 4
+    la $a0, linea_sep
+    syscall
+
 
     li $s0, 0
 loop_print:
@@ -145,9 +161,9 @@ loop_print:
     move $a0, $t3
     jal imprimir_nombre_equipo_grupo
 
-    # tab
+    # espacio 
     li $v0, 4
-    la $a0, sep_tab
+    la $a0, espacio
     syscall
 
     # GF
@@ -184,6 +200,10 @@ loop_print:
 
     li $v0, 4
     la $a0, salto_linea
+    syscall
+
+    li $v0, 4
+    la $a0, linea_sep
     syscall
 
     addi $s0, $s0, 1
