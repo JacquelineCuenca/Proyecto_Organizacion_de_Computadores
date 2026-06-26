@@ -19,7 +19,15 @@ simular_partidos:
     jal inicializar_estadisticas
 
     li $v0, 4
+    la $a0, linea_top
+    syscall
+
+    li $v0, 4
     la $a0, msj_resultados
+    syscall
+
+    li $v0, 4
+    la $a0, linea_top
     syscall
 
     # grupo[0] vs grupo[1]
@@ -176,6 +184,10 @@ imprimir_resultado_partido:
     la $a0, salto_linea
     syscall
 
+    li $v0, 4
+    la $a0, linea_sep
+    syscall
+
     lw $ra, 0($sp)
     addi $sp, $sp, 24
     jr $ra
@@ -218,11 +230,23 @@ mostrar_tabla_sin_orden:
     sw $s0, 4($sp)
 
     li $v0, 4
+    la $a0, linea_top
+    syscall
+
+    li $v0, 4
     la $a0, msj_tabla
     syscall
 
     li $v0, 4
+    la $a0, linea_top
+    syscall
+
+    li $v0, 4
     la $a0, enc_tabla
+    syscall
+
+    li $v0, 4
+    la $a0, linea_sep
     syscall
 
     li $s0, 0
@@ -273,6 +297,10 @@ loop_tabla:
 
     li $v0, 4
     la $a0, salto_linea
+    syscall
+
+    li $v0, 4
+    la $a0, linea_sep
     syscall
 
     addi $s0, $s0, 1
